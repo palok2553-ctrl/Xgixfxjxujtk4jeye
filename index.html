@@ -2,146 +2,212 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Happy Anniversary ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
     <style>
+        /* ORIGINAL FULL SCREEN DESIGN */
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html, body { margin: 0; padding: 0; width: 100%; height: 100%; background: #fff; font-family: 'Poppins', sans-serif; color: #000; overflow: hidden; }
+        html, body { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            background: #000; overflow: hidden; font-family: 'Poppins', sans-serif;
+        }
 
-        .page { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; padding: 30px 20px; text-align: center; overflow-y: auto; }
-        .active { display: flex; flex-direction: column; align-items: center; }
+        /* STARS */
+        .stars { position: fixed; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle, #1a1a2e 0%, #000 100%); }
+        .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 2s infinite alternate; }
+        @keyframes twinkle { from { opacity: 0.2; } to { opacity: 1; } }
 
-        /* BRIGHT THEMES FOR VISIBILITY */
-        #page1 { background: #ffdee9; background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%); }
-        #page2 { background: #ffffff; border: 10px solid #7b2cbf; } /* White background for the Hint page */
-        #page3 { background: #fff9c4; border: 10px solid #fbc02d; } /* Bright Yellow for Gift page */
-        #page4 { background: #e3f2fd; border: 10px solid #2196f3; } 
-        #page5 { background: #f5f5f5; border: 10px solid #ff4d6d; }
+        /* PAGE SYSTEM */
+        .page {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: none; padding: 50px 20px; text-align: center;
+            overflow-y: auto; overflow-x: hidden;
+        }
+        .active { display: flex; flex-direction: column; align-items: center; animation: fadeIn 0.8s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        h1 { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #d81b60; margin: 20px 0; }
-        p { font-size: 1.1rem; color: #333; font-weight: 500; }
+        /* ORIGINAL THEMES */
+        #page1 { background: linear-gradient(135deg, #ff9a9e, #fad0c4); border: 12px double #ff4d6d; }
+        #page2 { background: linear-gradient(135deg, #a18cd1, #fbc2eb); border: 12px dashed #7b2cbf; }
+        #page3 { background: #000; border: 12px solid #ffafcc; color: white; }
+        #page4 { background: linear-gradient(135deg, #ffecd2, #fcb69f); border: 12px double #ff8500; }
+        #page5 { background: linear-gradient(135deg, #cfd9df, #e2ebf0); border: 12px dotted #4361ee; }
 
-        /* INPUT BOX - MADE VERY VISIBLE */
+        h1 { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #000; margin: 10px 0; }
+        #page3 h1 { color: white; }
+
+        button {
+            padding: 16px 45px; font-size: 18px; font-weight: bold;
+            border: none; border-radius: 50px; background: #fff;
+            color: #ff4d6d; cursor: pointer; margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: 0.3s;
+        }
+
+        .music-btn {
+            position: fixed; top: 15px; right: 15px; z-index: 1000;
+            padding: 8px 15px; font-size: 12px; border-radius: 20px;
+            background: #ff4d6d; color: white; border: 2px solid white;
+        }
+
+        /* INPUT BOX FOR HINT PAGE */
         input { 
-            padding: 15px; 
-            font-size: 1.5rem; 
-            border-radius: 10px; 
-            border: 4px solid #7b2cbf; 
-            width: 90%; 
-            text-align: center; 
-            margin: 20px 0; 
-            background: #fdfdfd; 
-            color: #000; 
-            display: block !important; /* Forces it to show */
+            padding: 15px; font-size: 1.2rem; border-radius: 15px; 
+            border: 3px solid #ff4d6d; width: 85%; text-align: center; 
+            outline: none; background: white; color: black; margin-bottom: 10px;
         }
 
-        button { 
-            padding: 15px 40px; 
-            font-size: 1.1rem; 
-            font-weight: bold; 
-            border: none; 
-            border-radius: 50px; 
-            background: #d81b60; 
-            color: #fff; 
-            margin: 10px 0; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+        .gift, .heart { font-size: 100px; margin: 20px 0; animation: beat 1.2s infinite; cursor: pointer; }
+        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+        /* IMAGE SLIDESHOW */
+        .slideshow {
+            width: 100%; max-width: 320px; height: 450px;
+            position: relative; border-radius: 20px; overflow: hidden;
+            border: 8px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin: 20px 0;
         }
-
-        .music-btn { position: fixed; top: 10px; right: 10px; z-index: 1000; padding: 5px 10px; background: #000; color: #fff; font-size: 12px; border-radius: 5px; }
-
-        .gift, .heart { font-size: 100px; margin: 30px 0; cursor: pointer; }
-
-        /* PHOTO SLIDESHOW */
-        .slideshow { 
-            width: 280px; 
-            height: 380px; 
-            position: relative; 
-            border: 10px solid white; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
-            margin: 20px 0; 
-            background: #eee; /* Light gray background if photos fail */
-        }
-        .slide { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: 1s; }
+        .slide { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1.5s; }
         .active-slide { opacity: 1; }
 
-        .counter { font-size: 1.5rem; font-weight: bold; color: #d81b60; background: #fff; padding: 15px; border-radius: 15px; border: 2px solid #d81b60; margin: 20px 0; }
-        
-        .event { background: white; margin: 10px 0; padding: 15px; border-radius: 10px; border-left: 5px solid #d81b60; text-align: left; width: 100%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        /* TIMELINE */
+        .timeline { width: 100%; max-width: 400px; text-align: left; padding-bottom: 60px; }
+        .event { background: white; margin: 15px 0; padding: 18px; border-radius: 15px; border-left: 6px solid #ff4d6d; color: #333; }
+        .event h3 { margin: 0; color: #ff4d6d; font-size: 1.1rem; }
+
+        .counter { font-size: 1.5rem; font-weight: bold; color: #ff4d6d; margin: 20px 0; background: rgba(255,255,255,0.8); padding: 12px 25px; border-radius: 15px; }
+        .petal { position: fixed; font-size: 25px; animation: fall 7s linear infinite; pointer-events: none; z-index: 99; top: -10%; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop preload="auto">
         <source src="https://files.catbox.moe/xbgrnk.m4a" type="audio/mpeg">
     </audio>
 
-    <button class="music-btn" onclick="toggleMusic()" id="mBtn">🎵 Play Music</button>
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵 Play Music</button>
+    <div class="stars" id="stars"></div>
 
+    <!-- PAGE 1 -->
     <div id="page1" class="page active">
         <h1>Hi Sweetheart ❤️</h1>
-        <p>I have a special surprise for you.</p>
-        <button onclick="start()">Open My Heart ✨</button>
+        <p>I have a special surprise for you. Are you ready?</p>
+        <button onclick="startExperience()">Open My Heart ✨</button>
     </div>
 
+    <!-- PAGE 2 -->
     <div id="page2" class="page">
         <h1>Secret Code 🔐</h1>
         <p>Enter the 4-letter word for our bond:</p>
-        <!-- CLEAR INPUT BOX -->
-        <input type="text" id="pass" placeholder="Enter here...">
-        <p style="color: #7b2cbf;">Hint: love</p>
+        <input type="password" id="pass" placeholder="Hint: love">
         <button onclick="check()">Unlock</button>
     </div>
 
+    <!-- PAGE 3 -->
     <div id="page3" class="page">
         <h1>A Gift for You 🎁</h1>
-        <div class="gift" onclick="go(4)">🎁</div>
-        <p><b>Tap the box to open!</b></p>
+        <div class="gift" onclick="showPage(4)">🎁</div>
+        <p style="color:white">Tap the box to open it!</p>
     </div>
 
+    <!-- PAGE 4 -->
     <div id="page4" class="page">
         <h1>Happy Anniversary! ❤️</h1>
-        <div class="counter" id="days">--</div>
-        <div class="heart" onclick="go(5)">💖</div>
+        <div class="counter" id="timeTogether">--</div>
+        <div class="heart" onclick="showPage(5)">💖</div>
         <p>Tap the heart for memories</p>
     </div>
 
+    <!-- PAGE 5 -->
     <div id="page5" class="page">
         <h1>Our Journey 💌</h1>
+        <div style="background: white; padding: 20px; border-radius: 20px; width: 95%; margin-bottom: 20px; color: #333;">
+            <p>From the day we met, my life became brighter. Every smile and every memory with you is priceless. Let's make more memories!</p>
+        </div>
+
         <div class="slideshow">
-            <!-- PHOTO LINKS - RE-ADD YOUR LINKS HERE -->
+            <!-- ORIGINAL PHOTO LINKS -->
             <img class="slide active-slide" src="https://i.ibb.co/mrVTVfhG/image.jpg">
             <img class="slide" src="https://i.ibb.co/m5y4HtGJ/image.jpg">
             <img class="slide" src="https://i.ibb.co/fYQbM9rt/image.jpg">
         </div>
-        <div class="event"><h3>💫 The Day We Met</h3><p>Destiny brought us together! ✨</p></div>
-        <div class="event"><h3>💍 Forever</h3><p>I love you endlessly. 💕</p></div>
+
+        <div class="timeline">
+            <div class="event"><h3>💫 The Day We Met</h3><p>The day we met felt like destiny. Sparks flew instantly! ✨</p></div>
+            <div class="event"><h3>🌸 First Memory</h3><p>Our first laugh... unforgettable. 🌌</p></div>
+            <div class="event"><h3>❤️ Today</h3><p>Celebrating us—stronger every single day! 🎉</p></div>
+            <div class="event"><h3>💍 Forever</h3><p>Here's to eternity together. I love you endlessly. 💕</p></div>
+        </div>
         <button onclick="location.reload()">Watch Again 🔄</button>
     </div>
 
     <script>
-        const m = document.getElementById("bgMusic");
-        function toggleMusic() { 
-            if (m.paused) { m.play(); document.getElementById("mBtn").innerText = "⏸ Pause"; }
-            else { m.pause(); document.getElementById("mBtn").innerText = "🎵 Play"; }
+        const music = document.getElementById("bgMusic");
+        const musicBtn = document.getElementById("musicBtn");
+
+        function toggleMusic() {
+            if (music.paused) { music.play(); musicBtn.textContent = "⏸ Pause Music"; }
+            else { music.pause(); musicBtn.textContent = "🎵 Play Music"; }
         }
-        function start() { m.play(); go(2); }
-        function go(p) {
-            document.querySelectorAll('.page').forEach(pg => pg.style.display = 'none');
-            document.getElementById('page' + p).style.display = 'flex';
-            if(p === 4) {
-                const start = new Date(2025, 3, 1);
-                const diff = Math.floor((new Date() - start) / 86400000);
-                document.getElementById("days").innerText = "Together for ❤️ " + diff + " Days";
-            }
-            if(p === 5) {
-                let i = 0; const s = document.querySelectorAll(".slide");
-                setInterval(() => { s[i].classList.remove("active-slide"); i=(i+1)%s.length; s[i].classList.add("active-slide"); }, 3000);
-            }
+
+        function startExperience() {
+            music.play().catch(e => console.log("Audio blocked"));
+            musicBtn.textContent = "⏸ Pause Music";
+            showPage(2);
         }
+
+        function showPage(p) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('page' + p).classList.add('active');
+            window.scrollTo(0,0);
+            if (p === 4) { startPetals(); updateTime(); }
+            if (p === 5) startSlideshow();
+        }
+
         function check() {
-            if (document.getElementById("pass").value.toLowerCase().trim() === "love") go(3);
-            else alert("Try 'love' ❤️");
+            const val = document.getElementById("pass").value.toLowerCase().trim();
+            if (val === "love") showPage(3);
+            else alert("Incorrect! Hint: starts with L ❤️");
+        }
+
+        function startSlideshow() {
+            let idx = 0;
+            const slides = document.querySelectorAll(".slide");
+            setInterval(() => {
+                slides[idx].classList.remove("active-slide");
+                idx = (idx + 1) % slides.length;
+                slides[idx].classList.add("active-slide");
+            }, 3500);
+        }
+
+        function updateTime() {
+            // Updated Date: April 1, 2025
+            const startDate = new Date(2025, 3, 1); 
+            const now = new Date();
+            const days = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+            document.getElementById("timeTogether").innerHTML = `Together for ❤️ ${days} Days`;
+        }
+
+        // Stars Background
+        const starContainer = document.getElementById("stars");
+        for (let i = 0; i < 70; i++) {
+            const star = document.createElement("div");
+            star.className = "star";
+            star.style.top = Math.random() * 100 + "vh";
+            star.style.left = Math.random() * 100 + "vw";
+            starContainer.appendChild(star);
+        }
+
+        function startPetals() {
+            setInterval(() => {
+                const p = document.createElement("div");
+                p.className = "petal";
+                p.innerHTML = ["🌸", "🌹", "❤️"][Math.floor(Math.random() * 3)];
+                p.style.left = Math.random() * 100 + "vw";
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 7000);
+            }, 600);
         }
     </script>
 </body>
