@@ -2,168 +2,146 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Anniversary ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html, body { margin: 0; padding: 0; width: 100%; height: 100%; background: #fff; overflow: hidden; font-family: 'Poppins', sans-serif; }
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; background: #fff; font-family: 'Poppins', sans-serif; color: #000; overflow: hidden; }
 
-        .stars { position: fixed; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle, #ffecd2 0%, #fcb69f 100%); }
+        .page { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; padding: 30px 20px; text-align: center; overflow-y: auto; }
+        .active { display: flex; flex-direction: column; align-items: center; }
 
-        .page { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; padding: 40px 20px; text-align: center; overflow-y: auto; overflow-x: hidden; }
-        .active { display: flex; flex-direction: column; align-items: center; animation: fadeIn 0.8s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        /* BRIGHT THEMES FOR VISIBILITY */
+        #page1 { background: #ffdee9; background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%); }
+        #page2 { background: #ffffff; border: 10px solid #7b2cbf; } /* White background for the Hint page */
+        #page3 { background: #fff9c4; border: 10px solid #fbc02d; } /* Bright Yellow for Gift page */
+        #page4 { background: #e3f2fd; border: 10px solid #2196f3; } 
+        #page5 { background: #f5f5f5; border: 10px solid #ff4d6d; }
 
-        /* FIXED BRIGHTER DESIGNS */
-        #page1 { background: linear-gradient(135deg, #ff9a9e, #fad0c4); border: 15px double #ff4d6d; }
-        
-        /* Hint Page - Now Purple & Pink */
-        #page2 { background: linear-gradient(135deg, #e0c3fc, #8ec5fc); border: 15px dashed #7b2cbf; color: #333; }
-        
-        /* Gift Page - No longer Black! Now Gold & Sky Blue */
-        #page3 { background: linear-gradient(135deg, #fddb92, #d1fdff); border: 15px solid #ffafcc; color: #333; }
-        
-        #page4 { background: linear-gradient(135deg, #fff1eb, #ace0f9); border: 15px double #ff8500; }
-        #page5 { background: linear-gradient(135deg, #fdfbfb, #ebedee); border: 15px dotted #4361ee; }
+        h1 { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #d81b60; margin: 20px 0; }
+        p { font-size: 1.1rem; color: #333; font-weight: 500; }
 
-        h1 { font-family: 'Great Vibes', cursive; font-size: 3.2rem; color: #ff4d6d; margin: 10px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
-        
-        button { padding: 16px 40px; font-size: 18px; font-weight: bold; border: none; border-radius: 50px; background: #ff4d6d; color: #fff; cursor: pointer; margin: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        
-        .music-btn { position: fixed; top: 15px; right: 15px; z-index: 1000; padding: 8px 15px; font-size: 12px; border-radius: 20px; background: #ff4d6d; color: white; border: 2px solid white; font-weight: bold; }
+        /* INPUT BOX - MADE VERY VISIBLE */
+        input { 
+            padding: 15px; 
+            font-size: 1.5rem; 
+            border-radius: 10px; 
+            border: 4px solid #7b2cbf; 
+            width: 90%; 
+            text-align: center; 
+            margin: 20px 0; 
+            background: #fdfdfd; 
+            color: #000; 
+            display: block !important; /* Forces it to show */
+        }
 
-        input { padding: 15px; font-size: 1.2rem; border-radius: 15px; border: 3px solid #ff4d6d; width: 85%; text-align: center; outline: none; margin: 20px 0; background: white; color: #333; }
-        input::placeholder { color: #999; font-size: 0.9rem; }
+        button { 
+            padding: 15px 40px; 
+            font-size: 1.1rem; 
+            font-weight: bold; 
+            border: none; 
+            border-radius: 50px; 
+            background: #d81b60; 
+            color: #fff; 
+            margin: 10px 0; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+        }
 
-        .gift, .heart { font-size: 90px; margin: 20px 0; animation: beat 1.2s infinite; cursor: pointer; }
-        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        .music-btn { position: fixed; top: 10px; right: 10px; z-index: 1000; padding: 5px 10px; background: #000; color: #fff; font-size: 12px; border-radius: 5px; }
 
-        .slideshow { width: 100%; max-width: 300px; height: 420px; position: relative; border-radius: 20px; overflow: hidden; border: 8px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin: 20px 0; }
-        .slide { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0; transition: opacity 1.5s; }
+        .gift, .heart { font-size: 100px; margin: 30px 0; cursor: pointer; }
+
+        /* PHOTO SLIDESHOW */
+        .slideshow { 
+            width: 280px; 
+            height: 380px; 
+            position: relative; 
+            border: 10px solid white; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
+            margin: 20px 0; 
+            background: #eee; /* Light gray background if photos fail */
+        }
+        .slide { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: 1s; }
         .active-slide { opacity: 1; }
 
-        .timeline { width: 100%; max-width: 380px; text-align: left; padding-bottom: 50px; }
-        .event { background: white; margin: 12px 0; padding: 15px; border-radius: 12px; border-left: 6px solid #ff4d6d; color: #333; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .event h3 { margin: 0; color: #ff4d6d; font-size: 1rem; }
-
-        .counter { font-size: 1.4rem; font-weight: 700; color: #ff4d6d; margin: 20px 0; background: white; padding: 15px 25px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); border: 2px solid #ff4d6d; }
-        .petal { position: fixed; font-size: 25px; animation: fall 7s linear infinite; pointer-events: none; z-index: 99; top: -10%; }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        .counter { font-size: 1.5rem; font-weight: bold; color: #d81b60; background: #fff; padding: 15px; border-radius: 15px; border: 2px solid #d81b60; margin: 20px 0; }
+        
+        .event { background: white; margin: 10px 0; padding: 15px; border-radius: 10px; border-left: 5px solid #d81b60; text-align: left; width: 100%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
 
-    <audio id="bgMusic" loop preload="auto">
+    <audio id="bgMusic" loop>
         <source src="https://files.catbox.moe/xbgrnk.m4a" type="audio/mpeg">
     </audio>
 
-    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵 Play Music</button>
-    <div class="stars" id="stars"></div>
+    <button class="music-btn" onclick="toggleMusic()" id="mBtn">🎵 Play Music</button>
 
     <div id="page1" class="page active">
         <h1>Hi Sweetheart ❤️</h1>
-        <p style="color: #444; font-weight: 500;">I have a special surprise for you. Are you ready?</p>
-        <button onclick="startExperience()">Open My Heart ✨</button>
+        <p>I have a special surprise for you.</p>
+        <button onclick="start()">Open My Heart ✨</button>
     </div>
 
     <div id="page2" class="page">
         <h1>Secret Code 🔐</h1>
-        <p style="color: #444;">Enter the 4-letter word for our bond:</p>
-        <input type="password" id="pass" placeholder="Hint: love">
+        <p>Enter the 4-letter word for our bond:</p>
+        <!-- CLEAR INPUT BOX -->
+        <input type="text" id="pass" placeholder="Enter here...">
+        <p style="color: #7b2cbf;">Hint: love</p>
         <button onclick="check()">Unlock</button>
     </div>
 
     <div id="page3" class="page">
         <h1>A Gift for You 🎁</h1>
-        <div class="gift" onclick="showPage(4)">🎁</div>
-        <p style="color: #ff4d6d; font-weight: bold; font-size: 1.2rem;">Tap the box to open it!</p>
+        <div class="gift" onclick="go(4)">🎁</div>
+        <p><b>Tap the box to open!</b></p>
     </div>
 
     <div id="page4" class="page">
         <h1>Happy Anniversary! ❤️</h1>
-        <div class="counter" id="timeTogether">--</div>
-        <div class="heart" onclick="showPage(5)">💖</div>
-        <p style="color: #444;">Tap the heart for memories</p>
+        <div class="counter" id="days">--</div>
+        <div class="heart" onclick="go(5)">💖</div>
+        <p>Tap the heart for memories</p>
     </div>
 
     <div id="page5" class="page">
         <h1>Our Journey 💌</h1>
-        <div style="background: white; padding: 20px; border-radius: 20px; width: 100%; margin-bottom: 20px; color: #333; border: 1px solid #eee;">
-            <p>From the day we met, my life became brighter. Every smile and every memory with you is priceless. Let's make more memories!</p>
-        </div>
-
         <div class="slideshow">
+            <!-- PHOTO LINKS - RE-ADD YOUR LINKS HERE -->
             <img class="slide active-slide" src="https://i.ibb.co/mrVTVfhG/image.jpg">
             <img class="slide" src="https://i.ibb.co/m5y4HtGJ/image.jpg">
             <img class="slide" src="https://i.ibb.co/fYQbM9rt/image.jpg">
         </div>
-
-        <div class="timeline">
-            <div class="event"><h3>💫 The Day We Met</h3><p>The day we met felt like destiny. Sparks flew instantly! ✨</p></div>
-            <div class="event"><h3>🌸 First Memory</h3><p>Our first laugh... unforgettable. 🌌</p></div>
-            <div class="event"><h3>❤️ Today</h3><p>Celebrating us—stronger every single day! 🎉</p></div>
-            <div class="event"><h3>💍 Forever</h3><p>Here's to eternity together. I love you endlessly. 💕</p></div>
-        </div>
+        <div class="event"><h3>💫 The Day We Met</h3><p>Destiny brought us together! ✨</p></div>
+        <div class="event"><h3>💍 Forever</h3><p>I love you endlessly. 💕</p></div>
         <button onclick="location.reload()">Watch Again 🔄</button>
     </div>
 
     <script>
-        const music = document.getElementById("bgMusic");
-        const musicBtn = document.getElementById("musicBtn");
-
-        function toggleMusic() {
-            if (music.paused) { music.play(); musicBtn.textContent = "⏸ Pause Music"; }
-            else { music.pause(); musicBtn.textContent = "🎵 Play Music"; }
+        const m = document.getElementById("bgMusic");
+        function toggleMusic() { 
+            if (m.paused) { m.play(); document.getElementById("mBtn").innerText = "⏸ Pause"; }
+            else { m.pause(); document.getElementById("mBtn").innerText = "🎵 Play"; }
         }
-
-        function startExperience() {
-            music.play().catch(() => {});
-            musicBtn.textContent = "⏸ Pause Music";
-            showPage(2);
+        function start() { m.play(); go(2); }
+        function go(p) {
+            document.querySelectorAll('.page').forEach(pg => pg.style.display = 'none');
+            document.getElementById('page' + p).style.display = 'flex';
+            if(p === 4) {
+                const start = new Date(2025, 3, 1);
+                const diff = Math.floor((new Date() - start) / 86400000);
+                document.getElementById("days").innerText = "Together for ❤️ " + diff + " Days";
+            }
+            if(p === 5) {
+                let i = 0; const s = document.querySelectorAll(".slide");
+                setInterval(() => { s[i].classList.remove("active-slide"); i=(i+1)%s.length; s[i].classList.add("active-slide"); }, 3000);
+            }
         }
-
-        function showPage(p) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.getElementById('page' + p).classList.add('active');
-            window.scrollTo(0,0);
-            if (p === 4) { startPetals(); updateTime(); }
-            if (p === 5) startSlideshow();
-        }
-
         function check() {
-            const val = document.getElementById("pass").value.toLowerCase().trim();
-            if (val === "love") showPage(3);
-            else alert("Hint: starts with L ❤️");
-        }
-
-        function startSlideshow() {
-            let idx = 0;
-            const slides = document.querySelectorAll(".slide");
-            setInterval(() => {
-                slides[idx].classList.remove("active-slide");
-                idx = (idx + 1) % slides.length;
-                slides[idx].classList.add("active-slide");
-            }, 3500);
-        }
-
-        function updateTime() {
-            // Updated Date: April 1, 2025
-            const startDate = new Date(2025, 3, 1); 
-            const now = new Date();
-            const diff = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
-            document.getElementById("timeTogether").innerHTML = `Together for ❤️ ${diff} Days`;
-        }
-
-        function startPetals() {
-            setInterval(() => {
-                const p = document.createElement("div");
-                p.className = "petal";
-                p.innerHTML = ["🌸", "🌹", "❤️"][Math.floor(Math.random() * 3)];
-                p.style.left = Math.random() * 100 + "vw";
-                document.body.appendChild(p);
-                setTimeout(() => p.remove(), 7000);
-            }, 600);
+            if (document.getElementById("pass").value.toLowerCase().trim() === "love") go(3);
+            else alert("Try 'love' ❤️");
         }
     </script>
 </body>
